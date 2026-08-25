@@ -49,7 +49,8 @@ function Favorites() {
         </>
       ) : (
         <div className="empty-favorites">
-          <h2>No Favorite Movies Yet!</h2>
+          <h2>🎬 Your Favorite Movies Will Appear Here!</h2>
+          <p>Start exploring and tap ❤️ on movies you love.</p>
         </div>
       )}
 
