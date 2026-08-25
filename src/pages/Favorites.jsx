@@ -1,105 +1,59 @@
-import {
-  useDispatch,
-  useSelector
-} from "react-redux";
-
-import {
-  removeFavorite
-} from "../features/favoriteSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFavorite } from "../features/favoriteSlice";
 
 function Favorites() {
-
   const dispatch = useDispatch();
 
-  const favorites = useSelector(
-    state => state.favorites
-  );
+  const favorites = useSelector((state) => state.favorites);
 
   return (
-
     <div className="favorites-container">
 
-      <h1 className="page-title">
-        Favorite Movies ❤
-      </h1>
-
-      {
-        favorites.length === 0 ? (
-
-          <div className="empty-favorites">
-
-            <h2>
-              No Favorite Movies Yet!
-            </h2>
-
-            <p>
-              Add movies from the
-              Movies page.
-            </p>
-
-          </div>
-
-        ) : (
+      {favorites.length > 0 ? (
+        <>
+          <h1 className="page-title">
+            Favorite Movies ❤
+          </h1>
 
           <div className="favorites-grid">
+            {favorites.map((destination) => (
+              <div
+                key={destination.id}
+                className="favorite-card"
+              >
+                <img
+                  src={destination.image}
+                  alt={destination.name}
+                />
 
-            {
-              favorites.map(destination => (
+                <div className="favorite-content">
+                  <h2>{destination.name}</h2>
 
-                <div
-                  key={destination.id}
-                  className="favorite-card"
-                >
+                  <p>🌍 {destination.country}</p>
 
-                  <img
-                    src={destination.image}
-                    alt={destination.name}
-                  />
+                  <p>⭐ {destination.rating}</p>
 
-                  <div className="favorite-content">
+                  <p>🗣️ ₹{destination.language}</p>
 
-                    <h2>
-                      {destination.name}
-                    </h2>
-
-                    <p>
-                      🌍 {destination.country}
-                    </p>
-
-                    <p>
-                      ⭐ {destination.rating}
-                    </p>
-
-                    <p>
-                      💰 ₹{destination.language}
-                    </p>
-
-                    <button
-                      onClick={() =>
-                        dispatch(
-                          removeFavorite(
-                            destination.id
-                          )
-                        )
-                      }
-                    >
-                      Remove
-                    </button>
-
-                  </div>
-
+                  <button
+                    onClick={() =>
+                      dispatch(removeFavorite(destination.id))
+                    }
+                  >
+                    Remove
+                  </button>
                 </div>
-
-              ))
-            }
-
+              </div>
+            ))}
           </div>
-
-        )
-      }
+        </>
+      ) : (
+        <div className="empty-favorites">
+          <h2>No Favorite Movies Yet!</h2>
+        </div>
+      )}
 
     </div>
-
   );
 }
 

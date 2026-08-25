@@ -20,9 +20,13 @@ function AppRoutes() {
      />
 
      <Route
-       path="/destinations"
-       element={<Destinations />}
-     />
+      path="/destinations"
+      element={
+        <ProtectedRoute>
+          <Destinations />
+        </ProtectedRoute>
+      }
+    />
 
      <Route
        path="/destinations/:id"
@@ -67,9 +71,13 @@ function AppRoutes() {
       }
     />
     <Route
-       path="/favorites"
-       element={<Favorites/>}
-     />
+      path="/favorites"
+      element={
+        <ProtectedRoute>
+          <Favorites />
+        </ProtectedRoute>
+      }
+    />
 
 
    </Routes>
